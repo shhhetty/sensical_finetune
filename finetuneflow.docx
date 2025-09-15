@@ -1,0 +1,20 @@
+Use prepare_data.py to split existing data into train.jsonl and val.jsonl files
+Export your openai api key
+Upload these files to openai finetune job using this following commands:
+
+openai api files.create --purpose fine-tune --file train.jsonl 
+openai api files.create --purpose fine-tune --file val.jsonl 
+Make note of the respective ids
+After files are created, run the finetune job using this command: update the id;s of respective training file & val file
+
+  openai api fine_tuning.jobs.create \
+  -m gpt-4.1-mini-2025-04-14 \
+  -F "file-EUUdhwntAqwhYuJxyXG8fx" \
+  -V "file-18NafyV2CAWS4bfhhaJ8at"
+
+Check status using the following command
+openai api fine_tuning.jobs.retrieve -i ftjob-1DQFOfdkcRcOhvnf9Kg6xUT1
+
+Get the data:
+openai api fine_tuning.jobs.get -i ftjob-1DQFOfdkcRcOhvnf9Kg6xUT1
+
